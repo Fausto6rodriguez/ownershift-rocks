@@ -809,13 +809,16 @@ function load() {
   fetch(SB_URL + '/rest/v1/' + SB_TABLE + '?id=eq.' + SB_ID + '&select=data', {
     headers: {
       'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + SB_KEY
+      'Authorization': 'Bearer ' + authToken()
     }
   }).then(function(r) { return r.json(); })
   .then(function(rows) {
+    console.log('Supabase load response:', JSON.stringify(rows).substring(0, 200));
     if (rows && rows.length > 0 && rows[0].data) {
       applyData(rows[0].data);
       try { D._v=DATA_VERSION; localStorage.setItem(STORE, JSON.stringify(D)); } catch(e) {}
+    } else {
+      console.warn('Supabase returned no rows — RLS may be blocking read. Token used:', authToken() ? 'session token' : 'anon key');
     }
     setSyncStatus('');
     bootApp(); // seeds run inside bootApp after data is applied
