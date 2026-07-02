@@ -1255,6 +1255,7 @@ function buildRockCard(type,rock,ri) {
     renderStats(type+'-stats', getRocks(type));
     renderAllRocks();
   });
+  scoreInp.style.display='none';
   rightDiv.appendChild(scoreInp);
 
   var statusDiv=document.createElement('div'); statusDiv.className='rock-right-status';
@@ -1538,7 +1539,7 @@ function buildSubrocksTab(container,type,rock,ri) {
   addRow.appendChild(grid); addRow.appendChild(addBtn);
   container.appendChild(addRow);
 
-  var note=document.createElement('div'); note.className='grade-note'; note.textContent='Q Score on the rock card is set by leadership at quarter end. Setting a Conclusion Date auto-marks the sub-rock as Done. Tick "Recurring" for standing tasks with no deadline.';
+  var note=document.createElement('div'); note.className='grade-note'; note.textContent='Setting a Conclusion Date auto-marks the sub-rock as Done. Tick "Recurring" for standing tasks with no deadline.';
   container.appendChild(note);
 }
 
